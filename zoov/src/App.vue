@@ -1,30 +1,24 @@
 <template>
     <div id="app">
         <Nav />
+        <Main />
     </div>
 </template>
 
 <script>
-import Api from '../api/api.js'
-
-import Nav from '../src/components/Nav.vue'
+import Nav from '@/components/Nav.vue'
+import Main from '@/components/Main.vue'
 
 export default {
     name: 'App',
     components: {
-        Nav
-    },
-    created() {
-        Api.getBikes();
-    },
+        Nav,
+        Main
+    }
 }
 </script>
 
 <style>
-body {
-  margin: 0;
-}
-
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

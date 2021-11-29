@@ -5,6 +5,6 @@ export default class Api {
 
     static async getBikes() {     
         let res = await axios.get("https://61a4b01c4c822c0017041db3.mockapi.io/bikes/bike");
-        console.log(res);
+        return res.data;
     }
 }
