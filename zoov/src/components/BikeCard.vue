@@ -1,6 +1,5 @@
 <template>
     <div class="bikeInfos">
-        <button class="closePopIn" @click="closePopIn"></button>
         <div class="serial">
             <Bike />
             <h2>{{bike.serial_number}}</h2>
@@ -19,6 +18,9 @@
                     <Battery :level="bike.battery_level" />
                 </li>
             </ul>
+        <Btn @click.native="deleteBike(bike.id)" class="btnAdd" style="margin-top: 2rem">
+            Supprimer vélo
+        </Btn>
         </div>
     </div>
 </template>
@@ -26,16 +28,21 @@
 <script>
 import Bike from '@/assets/Bike'
 import Battery from '@/assets/Battery'
+import Btn from '@/components/Btn.vue'
 
 export default {
     props: ["bike"],
     components: {
         Bike,
-        Battery
+        Battery,
+        Btn
     },
     methods: {
         closePopIn() {
             this.$emit("closePopIn");
+        },
+        deleteBike(id) {
+            this.$emit('deleteBike', id)
         }
     },
 }
@@ -43,15 +50,15 @@ export default {
 
 <style lang="scss" scoped>
 .bikeInfos {
-    width: 60%;
-    height: 60%;
-    background-color: #fff;
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    border-radius: 4rem;
-    z-index: 10;
-    padding: 4rem;
+    // width: 60%;
+    // height: 60%;
+    // background-color: #fff;
+    // position: absolute;
+    // top: 20%;
+    // left: 20%;
+    // border-radius: 4rem;
+    // z-index: 10;
+    // padding: 4rem;
     .closePopIn {
         position: absolute;
         width: 4rem;

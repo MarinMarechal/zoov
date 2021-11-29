@@ -1,8 +1,8 @@
 <template>
     <div id="map">
-        <MglMap :accessToken="accessToken" :mapStyle="'mapbox://styles/m-marechal/cks5w7h19911k17o5p1nejmq4'" :center="coordinates" :zoom="12" :showZoom="true" :showUserLocation="true" :scrollZoom="false">
+        <MglMap :accessToken="accessToken" :mapStyle="'mapbox://styles/m-marechal/ckwkzgwp14pby14p4ufroj40f'" :center="coordinates" :zoom="12" :showZoom="true" :showUserLocation="true" :scrollZoom="false">
             <MglNavigationControl position="top-left" />
-            <MglMarker ref="marker" v-for="(bike, index) in bikes" :key="bike.id" :coordinates="[bike.location.coordinates[1], bike.location.coordinates[0]]" :color="'#1D1D1B'" @click="openItemCard(bike, index)">
+            <MglMarker ref="marker" v-for="(bike, index) in bikes" :key="bike.serial_number" :coordinates="[bike.location.coordinates[1], bike.location.coordinates[0]]" :color="'#1D1D1B'" @click="openItemCard(bike, index)">
                 <Bike slot="marker" class="icon-geo" data-color="primary"></Bike>
                 <!-- <div slot="marker" class="icon-geo">{{item.fields.prix}} €</div> -->
             </MglMarker>
@@ -48,11 +48,6 @@ export default {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    @media (max-width: 599px) {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
     .mapboxgl-ctrl-bottom-right {
         .mapboxgl-ctrl {
             background-color: transparent;
