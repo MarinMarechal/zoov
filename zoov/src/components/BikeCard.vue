@@ -8,17 +8,18 @@
             <ul>
                 <li>
                     <p>Status :</p>
-                    <p v-if="bike.in_order" style="color:red"> En location</p>
-                    <p v-else style="color:green"> Vacant</p>
+                    <p v-if="bike.in_order" style="color:green"> En Service</p>
+                    <p v-else style="color:red"> En panne</p>
                 </li>
                 <li>
-                    <p>Service status : {{bike.service_status}}</p>
+                    <p>Service status : </p>
+                    <p :class="`cl-${bike.service_status}`">{{statut}}</p>  
                 </li>
                 <li>
                     <Battery :level="bike.battery_level" />
                 </li>
             </ul>
-        <Btn @click.native="deleteBike(bike.id)" class="btnAdd" style="margin-top: 2rem">
+        <Btn @click.prevent.native="deleteBike(bike.id)" class="btnAdd" style="margin-top: 2rem">
             Supprimer vélo
         </Btn>
         </div>
@@ -37,6 +38,22 @@ export default {
         Battery,
         Btn
     },
+    computed: {
+        statut() {
+            let statut = "" 
+            switch (this.bike.service_status) {
+                case 1:
+                    return statut= "Libre"
+                case 2: 
+                    return statut= "Occupé"
+                case 3: 
+                    return statut= "En usage"
+                default:
+                    break;
+            }
+            return statut
+        }
+    },
     methods: {
         closePopIn() {
             this.$emit("closePopIn");
@@ -50,15 +67,6 @@ export default {
 
 <style lang="scss" scoped>
 .bikeInfos {
-    // width: 60%;
-    // height: 60%;
-    // background-color: #fff;
-    // position: absolute;
-    // top: 20%;
-    // left: 20%;
-    // border-radius: 4rem;
-    // z-index: 10;
-    // padding: 4rem;
     .closePopIn {
         position: absolute;
         width: 4rem;
@@ -125,6 +133,15 @@ export default {
                 }
                 svg {
                     height: 4rem;
+                }
+                .cl-1 {
+                    color: green;
+                }
+                .cl-2 {
+                    color: red;
+                }
+                .cl-3 {
+                    color: #4cadff;
                 }
             }
         }

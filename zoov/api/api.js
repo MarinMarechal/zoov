@@ -8,15 +8,12 @@ export default class Api {
         return res.data;
     }
 
-    static deleteBike(id) {     
+    static deleteBike(id) {   
         axios.delete(`https://61a4b01c4c822c0017041db3.mockapi.io/bikes/bike/${id}`);
     }
 
-    static addBike(newBike) {
-        console.log(newBike);
-
-        // lat: 48.891737326315074
-        // long :2.2900362657831117
-        axios.post("https://61a4b01c4c822c0017041db3.mockapi.io/bikes/bike", newBike);
+    static async addBike(newBike) {
+        let res = await axios.post("https://61a4b01c4c822c0017041db3.mockapi.io/bikes/bike", newBike);
+        return res.data
     }
 }

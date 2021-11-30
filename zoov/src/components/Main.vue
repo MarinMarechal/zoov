@@ -4,7 +4,6 @@
         <Map :bikes="bikes" @openBikeCard="openBikeCard" />
         <PopIn v-if="isPopIn" @closePopIn="closePopIn">
             <component :is='popInComponent' @deleteBike="deleteBike" :bike="bikeMap" @addBike="addBike"></component>
-            <!-- <BikeCard :bike="bikeMap"  @closePopIn="closePopIn" @deleteBike="deleteBike"/> -->
         </PopIn>
     
     </div>
@@ -66,17 +65,15 @@ export default {
                 },
                 service_status: form.service_status
             }
-            // Api.addBike(newBike);
-
-            let id = parseInt(this.bikes[this.bikes.length - 1].id);
-            newBike.id = id++;
-            this.bikes.push(newBike);
-            this.closePopIn();
+            Api.addBike(newBike).then(res => {
+                newBike.id = res.id;
+                this.bikes.push(newBike);
+                this.closePopIn();
+            });
         }
     },
     async created() {
         this.bikes = await Api.getBikes();
-        console.log(this.bikes);
     },
 }
 </script>

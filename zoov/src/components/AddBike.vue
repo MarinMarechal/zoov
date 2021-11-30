@@ -10,21 +10,30 @@
                 <label for="">Statut</label>
                 <select type="text" v-model="form.in_order" placeholder="Statut">
                                 <option disabled value="">Choisissez</option>
-                                <option v-for="option in form.options" v-bind:value="option.value" :key="option.text">
+                                <option v-for="option in form.optionsStatus" v-bind:value="option.value" :key="option.text">
                                     {{ option.text }}
                                 </option>
                             </select>
             </div>
             <div class="formItem">
                 <label for="">Statut de service</label>
-                <input type="text" v-model="form.service_status" placeholder="Statut de service">
+                <select type="text" v-model="form.service_status" placeholder="Statut de service">
+                                <option disabled value="">Choisissez</option>
+                                <option v-for="option in form.optionsService" v-bind:value="option.value" :key="option.text">
+                                    {{ option.text }}
+                                </option>
+                            </select>
             </div>
+            <!-- <div class="formItem">
+                <label for="">Statut de service</label>
+                <input type="text" v-model="form.service_status" placeholder="Statut de service">
+            </div> -->
             <div class="formItem">
                 <label for="">Location</label>
                 <input type="text" v-model="form.long" placeholder="Longitude">
                 <input type="text" v-model="form.lat" placeholder="Latitude">
             </div>
-            <Btn @click.native="addBike" class="btnAdd">
+            <Btn @click.prevent.native="addBike" class="btnAdd">
                 Ajouter vélo
             </Btn>
         </form>
@@ -43,8 +52,11 @@ export default {
             form: {
                 serial: null,
                 in_order: "Vacant",
-                options: [{ text: 'Vacant', value: false },
-                    { text: 'En Location', value: true },
+                optionsStatus: [{ text: 'En Service', value: true },
+                    { text: 'En Panne', value: false },
+                ],
+                optionsService: [{ text: 'Libre', value: 1 },
+                    { text: 'Occupé', value: 2 }, { text: 'En Service', value: 3}
                 ],
                 service_status: null,
                 lat: null,
