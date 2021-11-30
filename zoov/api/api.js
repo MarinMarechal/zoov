@@ -1,5 +1,4 @@
 import axios from 'axios'
-// let url = "http://localhost:10005/wp-json/wp/v2"
 
 export default class Api {
 
